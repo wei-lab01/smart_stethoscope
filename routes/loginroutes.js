@@ -18,9 +18,9 @@ if(!error) {
 }
 });
 
-exports.checking_duplication = function(req,res){   // 아이디 중복검사 실시 후 가입 완료, 새로 가입한 회원은 기존 행사에 대한 정보를 받을 수 없음 (user_event 테이블안에도 생성 해야함)
+exports.checking_duplication = function(req,res){   // 아이디 중복검사 실시 후 가입 완료
   var idc = req.body.payload.user_id;
-  connection.query('SELECT * FROM user WHERE id = ?',idc,
+  connection.query('SELECT * FROM user WHERE user_id = ?',idc,
     function(error, results){
       if (error){
         console.log(error);
@@ -39,7 +39,7 @@ exports.checking_duplication = function(req,res){   // 아이디 중복검사 �
             "user_id":req.body.payload.user_id,
             "user_pw":req.body.payload.user_pw,
             "user_gender":req.body.payload.user_gender,
-            "user_birth": req.body.payload.birth,            
+            "user_birth": req.body.payload.user_birth,            
             "timestamp": moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')
           }
           connection.query('INSERT INTO user SET ?',user, function (error, results) {
