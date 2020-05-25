@@ -1,20 +1,35 @@
 {
   "name": "lab_server",
   "version": "1.0.0",
-  "description": "",
+  "description": "\"# smart_stethoscope\"",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "author": "",
+  "author": "song",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mocha": "^7.2.0",
     "moment": "^2.24.0",
     "mysql": "^2.18.1",
     "require": "^2.4.20",
     "uglify-js": ">=2.6.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wei-lab01/smart_stethoscope.git"
+  },
+  "keywords": [
+    "smart",
+    "stethoscope"
+  ],
+  "bugs": {
+    "url": "https://github.com/wei-lab01/smart_stethoscope/issues"
+  },
+  "homepage": "https://github.com/wei-lab01/smart_stethoscope#readme"
 }
