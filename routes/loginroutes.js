@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
 });
 connection.connect(function(error){
 if(!error) {
-    console.log("user is connected ... nn");
+    console.log("database user is connected ... nn");
 } else {
     console.log(error)
     console.log("Error connecting user database ... nn");
