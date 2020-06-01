@@ -7,7 +7,7 @@ var connection = mysql.createConnection({
   port     : '6000',
   user     : 'root',
   password : 'lab',
-  database : 'smart_stethoscope'
+  database : 'lab_server'
 });
 connection.connect(function(error){
 if(!error) {
@@ -19,7 +19,7 @@ if(!error) {
 });
 
 exports.checking_duplication = function(req,res){   // 아이디 중복검사 실시 후 가입 완료
-  var user_id = req.body.payload.user_id;
+  var user_id = req.body.map.user_id;
   connection.query('SELECT * FROM user WHERE user_id = ?',user_id,
     function(error, results){
       if (error){
@@ -35,11 +35,10 @@ exports.checking_duplication = function(req,res){   // 아이디 중복검사 �
             }
         else{ 
           var user={
-            "user_name":req.body.payload.user_name,
-            "user_id":req.body.payload.user_id,
-            "user_pw":req.body.payload.user_pw,
-            "user_gender":req.body.payload.user_gender,
-            "user_birth": req.body.payload.user_birth,            
+            "userID":req.body.map.userID,
+            "userPassword":req.body.map.userPassword,
+            "userName":req.body.map.userName,
+            "userAge":req.body.map.userAge,
             "timestamp": moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')
           }
           connection.query('INSERT INTO user SET ?',user, function (error, results) {
@@ -57,7 +56,7 @@ exports.checking_duplication = function(req,res){   // 아이디 중복검사 �
                       console.log(results)
                       res.send({
                            "code":200,
-                           "success":"user registered sucessfully"
+                           "success":"성공"
                           });
                    }   
                 });
@@ -71,9 +70,9 @@ exports.checking_duplication = function(req,res){   // 아이디 중복검사 �
 
 
 exports.login = function(req,res){
-   var user_id= req.body.payload.user_id;
-   var user_pw = req.body.payload.user_pw;
-   connection.query('SELECT * FROM user WHERE user_id = ?',[user_id], function (error, results, fields) {
+   var userID= req.body.map.userID;
+   var userPassword = req.body.map.userPassword;
+   connection.query('SELECT * FROM user WHERE userID = ?',[userID], function (error, results, fields) {
    if (error) {
      // console.log("error ocurred",error);
      res.send({
@@ -84,8 +83,8 @@ exports.login = function(req,res){
    else{
      // console.log('The solution is: ', results);
      if(results.length >0){
-       if(results[0].user_pw == user_pw){
-         connection.query('SELECT USN, user_name FROM user WHERE user_id = ?',[user_id], function (error, results) {
+       if(results[0].userPassword == userPassword){
+         connection.query('SELECT USN, userName FROM user WHERE userID = ?',[userID], function (error, results) {
           if (error) {
             // console.log("error ocurred",error);
             res.send({
