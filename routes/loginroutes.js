@@ -19,8 +19,8 @@ if(!error) {
 });
 
 exports.checking_duplication = function(req,res){   // 아이디 중복검사 실시 후 가입 완료
-  var user_id = req.body.map.user_id;
-  connection.query('SELECT * FROM user WHERE user_id = ?',user_id,
+  var userID = req.body.map.userID;
+  connection.query('SELECT * FROM user WHERE userID = ?',userID,
     function(error, results){
       if (error){
         console.log(error);
